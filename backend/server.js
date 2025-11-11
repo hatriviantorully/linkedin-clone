@@ -29,16 +29,24 @@ const __dirname = path.resolve();
 //deploy
 const allowedOrigins = [
   "http://localhost:5173",
-  "https://linkedin-clone-frontend-omega.vercel.app", // ✅ domain frontend Vercel
+  "https://linkedin-clone-frontend-omega.vercel.app",
 ];
 
+// gunakan function agar otomatis menyesuaikan origin request
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); // allow mobile/postman
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.log("❌ Blocked by CORS:", origin);
+        return callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
-
 // ✅ Atau lebih simple untuk testing:
 // app.use(cors({
 //   origin: true, // Allow all origins sementara
