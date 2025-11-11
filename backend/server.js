@@ -18,10 +18,23 @@ const app = express();
 const PORT = process.env.PORT || 5002;
 const __dirname = path.resolve();
 
-// ✅ FIX: CORS untuk semua environment
+// ✅ FIX: CORS untuk development
+// app.use(
+//   cors({
+//     origin: "http://localhost:5173",
+//     credentials: true,
+//   })
+// );
+
+//deploy
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://linkedin-clone-frontend-omega.vercel.app", // ✅ domain frontend Vercel
+];
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );

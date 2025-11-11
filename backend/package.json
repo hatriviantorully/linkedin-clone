@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js",
-    "build": "echo 'No build step needed for backend'"
+    "start": "node server.js"
   },
   "keywords": [
     "backend",
